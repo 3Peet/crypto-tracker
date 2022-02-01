@@ -3,6 +3,7 @@ import React from "react";
 import {createWrapper} from "next-redux-wrapper";
 import store from "../redux/store";
 import {Provider} from "react-redux";
+import "/styles/globals.css";
 
 class MyApp extends App {
 	render() {

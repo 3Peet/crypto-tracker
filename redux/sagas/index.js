@@ -1,32 +1,14 @@
-import {all, takeEvery} from "redux-saga/effects";
+import {all} from "redux-saga/effects";
 import {
-	INCREMENT_REQ,
-	DECREMENT_REQ,
-	ADD_REQ,
-	INCREMENT_ASYNC_REQ,
-} from "../types";
-import {
-	setIncrementAction,
-	setDecrementAction,
-	setAddAction,
-	setIncrementAsyncAction,
+	watchIncrementAction,
+	watchDecrementAction,
+	watchAddAction,
+	watchIncrementAsyncAction,
 } from "./counter.action";
 
-function* watchIncrementAction() {
-	yield takeEvery(INCREMENT_REQ, setIncrementAction);
-}
+import mySaga from "./users.saga";
 
-function* watchIncrementAsyncAction() {
-	yield takeEvery(INCREMENT_ASYNC_REQ, setIncrementAsyncAction);
-}
-
-function* watchDecrementAction() {
-	yield takeEvery(DECREMENT_REQ, setDecrementAction);
-}
-
-function* watchAddAction() {
-	yield takeEvery(ADD_REQ, setAddAction);
-}
+import watchPairData from "./pairData.saga";
 
 export default function* rootSage() {
 	yield all([
@@ -34,5 +16,7 @@ export default function* rootSage() {
 		watchDecrementAction(),
 		watchAddAction(),
 		watchIncrementAsyncAction(),
+		mySaga(),
+		watchPairData(),
 	]);
 }

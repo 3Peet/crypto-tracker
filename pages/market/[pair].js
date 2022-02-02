@@ -24,7 +24,7 @@ const Market = () => {
 			dispatch(getPairDataFetch(pair.toLowerCase()));
 		}, 5000);
 		return () => clearInterval(interval);
-	}, [pair]);
+	}, [dispatch]);
 
 	return (
 		<LayoutContainer theme="light">

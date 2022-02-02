@@ -3,14 +3,16 @@ import styled from "styled-components";
 
 import TextGradient from "../components/TextGradient";
 import ButtonGradient from "./ButtonGradient";
-
+import Image from "next/image";
 const {Content} = Layout;
 const Banner = () => {
 	return (
 		<Content style={{marginTop: "100px"}}>
 			<BannerWrapper>
 				<TextContainer>
-					<TextGradient fontSize={"70px"}>Thailand's most trusted</TextGradient>
+					<TextGradient fontSize={"70px"}>
+						Thailand&apos;s most trusted
+					</TextGradient>
 					<br />
 					<TextBanner fontSize={"70px"}>digital asset exchange.</TextBanner>
 					<br />
@@ -26,7 +28,7 @@ const Banner = () => {
 				</TextContainer>
 
 				<ImageBannerConatainer>
-					<img src="sheild-dynamic-gradient.png" alt="demo" />
+					<img src="/sheild-dynamic-gradient.png" alt="demo" />
 				</ImageBannerConatainer>
 			</BannerWrapper>
 		</Content>

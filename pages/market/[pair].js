@@ -2,6 +2,8 @@ import React, {useEffect} from "react";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {getPairDataFetch} from "/redux/actions/pairData.action";
+import {Switch} from "antd";
+
 const Market = () => {
 	const router = useRouter();
 	const {pair} = router.query;
@@ -11,6 +13,10 @@ const Market = () => {
 		({pairDataReducer}) => pairDataReducer.pairData.lastPrice
 	);
 
+	function onChange(checked) {
+		console.log(`switch to ${checked}`);
+	}
+
 	useEffect(() => {
 		const interval = setInterval(() => {
 			dispatch(getPairDataFetch(pair.toLowerCase()));
@@ -19,9 +25,12 @@ const Market = () => {
 	}, []);
 
 	return (
-		<h1>
-			{pair.replace("_", "/")}: {pairData}
-		</h1>
+		<>
+			<Switch defaultChecked onChange={onChange} />
+			<h1>
+				{pair.replace("_", "/")}: {pairData}
+			</h1>
+		</>
 	);
 };
 

@@ -1,4 +1,6 @@
 @import "~antd/dist/antd.css";
+
+/* Jakarta Display font  */
 @import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/plus-jakarta-display.min.css");
 
 html,

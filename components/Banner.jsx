@@ -22,7 +22,7 @@ const Banner = () => {
 						Market
 					</ButtonGradient>
 
-					<BlogLink>See the blog</BlogLink>
+					<BlogLink>See the Blog</BlogLink>
 				</TextContainer>
 
 				<ImageBannerConatainer>
@@ -37,7 +37,7 @@ const BlogLink = styled.a`
 	color: #000;
 	font-size: 18px;
 	line-height: 100%;
-	font-weight: 600;
+	font-weight: 700;
 	margin-left: 40px;
 	&:hover {
 		color: #000;

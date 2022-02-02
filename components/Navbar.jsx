@@ -1,18 +1,23 @@
 import {Layout, Menu} from "antd";
 import styled from "styled-components";
+import Link from "next/link";
 const {Header} = Layout;
 
 const Navbar = () => {
 	return (
 		<HeaderContainer>
 			<NavbarContainer>
-				<TextLogo className="logo">Crypto.</TextLogo>
+				<TextLogo className="logo">
+					<Link href="/">Crypto.</Link>
+				</TextLogo>
 				<MenuContainer
 					theme="light"
 					mode="horizontal"
 					triggerSubMenuAction="click"
 				>
-					<MenuItemText key={1}>Home</MenuItemText>
+					<MenuItemText key={1}>
+						<Link href="/">Home</Link>
+					</MenuItemText>
 					<MenuItemText key={2}>Trade</MenuItemText>
 					<MenuItemText key={3}>Blog</MenuItemText>
 					<MenuItemText key={4}>Contact</MenuItemText>

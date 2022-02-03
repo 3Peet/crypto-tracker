@@ -1,9 +1,3 @@
-export const INCREMENT = "INCREMENT";
-export const INCREMENT_REQ = "INCREMENT_REQ";
-export const INCREMENT_ASYNC_REQ = "INCREMENT_ASYNC_REQ";
-
-export const DECREMENT = "DECREMENT";
-export const DECREMENT_REQ = "DECREMENT_REQ";
-
-export const ADD = "ADD";
-export const ADD_REQ = "ADD_REQ";
+export const GET_PAIR_DATA_FETCH = "GET_PAIR_DATA_FETCH";
+export const GET_PAIR_DATA_SUCCESS = "GET_PAIR_DATA_SUCCESS";
+export const GET_PAIR_DATA_FAILURE = "GET_PAIR_DATA_FAILURE";

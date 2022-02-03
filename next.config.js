@@ -12,6 +12,9 @@ module.exports = withAntdLess({
 	cssLoaderOptions: {},
 
 	// Other Config Here...
+	images: {
+		domains: ["storage.googleapis.com"],
+	},
 
 	webpack(config) {
 		return config;

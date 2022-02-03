@@ -3,7 +3,7 @@ import {
 	GET_PAIR_DATA_FETCH,
 	GET_PAIR_DATA_SUCCESS,
 	GET_PAIR_DATA_FAILURE,
-} from "../actions/pairData.action";
+} from "../types";
 
 function pairDataFetch({pair}) {
 	return fetch(`https://satangcorp.com/api/v3/ticker/24hr?symbol=${pair}`).then(
@@ -21,7 +21,6 @@ function* workGetPairDataFetch(data) {
 }
 
 function* watchPairData() {
-	console.log();
 	yield takeEvery(GET_PAIR_DATA_FETCH, workGetPairDataFetch);
 }
 

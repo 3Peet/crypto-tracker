@@ -2,38 +2,40 @@ import React, {useEffect} from "react";
 import Head from "next/head";
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
-import {getPairDataFetch} from "/redux/actions/pair.action";
 import {LayoutContainer} from "..";
 import Navbar from "../../components/Navbar";
 import {Card, Button} from "antd";
 import styled from "styled-components";
 import Link from "next/link";
 import PairDataCard from "../../components/PairDataCard";
+import {
+	fetch24hrsTicker,
+	startPolling,
+	stopPolling,
+} from "../../redux/actions/market.action";
 
 const Market = () => {
+	// Get pair variable from route.
 	const router = useRouter();
 	const {pair} = router.query;
+
+	// Setup dispatch and selector for interactive to the Redux.
 	const dispatch = useDispatch();
+	const {lastPrice, quoteVolume, priceChangePercent} = useSelector(
+		({marketReducer}) => marketReducer.items
+	);
 
-	const pairData = useSelector(({pairDataReducer}) => pairDataReducer.pairData);
-
-	const pairTypes = [
+	// Define Button type.
+	const ButtonTypes = [
 		{name: "BTC_THB"},
 		{name: "BUSD_THB"},
 		{name: "USDT_THB"},
-		// {name: "ETH_THB"},
 	];
 
+	// UseEffect active when changing route.
 	useEffect(() => {
-		function FetchPairData() {
-			return dispatch(getPairDataFetch(pair.toLowerCase()));
-		}
-		FetchPairData();
-
-		const interval = setInterval(() => {
-			FetchPairData();
-		}, 5000);
-		return () => clearInterval(interval);
+		dispatch(stopPolling());
+		dispatch(startPolling(pair.toLowerCase()));
 	}, [pair]);
 
 	return (
@@ -43,6 +45,7 @@ const Market = () => {
 			</Head>
 			<LayoutContainer theme="light">
 				<Navbar />
+
 				<PairContainer>
 					<CardGlass>
 						<Card
@@ -57,9 +60,9 @@ const Market = () => {
 						>
 							<PairDataCard
 								title={pair}
-								quoteVolume={pairData.quoteVolume}
-								lastPrice={pairData.lastPrice}
-								priceChangePercent={pairData.priceChangePercent}
+								quoteVolume={quoteVolume}
+								lastPrice={lastPrice}
+								priceChangePercent={priceChangePercent}
 							/>
 						</Card>
 						<VerticalLine />
@@ -69,11 +72,10 @@ const Market = () => {
 								display: "flex",
 								flexDirection: "column",
 								justifyContent: "center",
-
 								height: 400,
 							}}
 						>
-							{pairTypes.map((item, index) => (
+							{ButtonTypes.map((item, index) => (
 								<PairButton key={index} style={{margin: 10, height: 50}}>
 									<Link href={`/market/${item.name}`}>
 										{item.name.replace("_", "/")}
@@ -95,6 +97,12 @@ const VerticalLine = styled.div`
 
 const PairButton = styled(Button)`
 	border-radius: 10px;
+
+	:hover {
+		transform: translateY(-2px);
+		border: 1px solid #6d6875;
+		transition: all 0.3s ease;
+	}
 `;
 
 const PairContainer = styled.div`

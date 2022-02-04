@@ -15,12 +15,14 @@ const Navbar = () => {
 					mode="horizontal"
 					triggerSubMenuAction="click"
 				>
-					<MenuItemText key={1}>
+					<MenuItemText key={"home"}>
 						<Link href="/">Home</Link>
 					</MenuItemText>
-					<MenuItemText key={2}>Trade</MenuItemText>
-					<MenuItemText key={3}>Blog</MenuItemText>
-					<MenuItemText key={4}>Contact</MenuItemText>
+					<MenuItemText key={"market"}>
+						<Link href="/market/BTC_THB">Market</Link>
+					</MenuItemText>
+					<MenuItemText key={"blog"}>Blog</MenuItemText>
+					<MenuItemText key={"contact"}>Contact</MenuItemText>
 				</MenuContainer>
 			</NavbarContainer>
 		</HeaderContainer>

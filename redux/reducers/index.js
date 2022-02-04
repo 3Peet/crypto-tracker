@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 
-import pairDataReducer from "./pair.reducer";
+import marketReducer from "./market.reducer";
 
 export default combineReducers({
-	pairDataReducer,
+	marketReducer,
 });

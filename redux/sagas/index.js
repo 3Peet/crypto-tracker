@@ -1,7 +1,7 @@
 import {all} from "redux-saga/effects";
 
-import watchPairData from "./pair.saga";
+import {watchPollMarketData} from "./market.saga";
 
 export default function* rootSage() {
-	yield all([watchPairData()]);
+	yield all([watchPollMarketData()]);
 }

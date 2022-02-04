@@ -10,7 +10,6 @@ export default function Home() {
 		<>
 			<Head>
 				<title>Crypto Tracker 24/7</title>
-				<link rel="icon" href="/sheild-front-gradient.ico"></link>
 			</Head>
 			<LayoutContainer theme="light">
 				<Navbar />

@@ -34,8 +34,12 @@ const Market = () => {
 
 	// UseEffect active when changing route.
 	useEffect(() => {
-		dispatch(stopPolling());
 		dispatch(startPolling(pair.toLowerCase()));
+
+		// Unmount Polling when changing route
+		return () => {
+			dispatch(stopPolling());
+		};
 	}, [pair]);
 
 	return (

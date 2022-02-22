@@ -21,7 +21,9 @@ const Navbar = () => {
 					<MenuItemText key={"market"}>
 						<Link href="/market/BTC_THB">Market</Link>
 					</MenuItemText>
-					<MenuItemText key={"blog"}>Blog</MenuItemText>
+					<MenuItemText key={"websocket"}>
+						<Link href="/socket/BTC_THB">Websocket</Link>
+					</MenuItemText>
 					<MenuItemText key={"contact"}>Contact</MenuItemText>
 				</MenuContainer>
 			</NavbarContainer>

@@ -24,7 +24,7 @@ const Banner = () => {
 						Market
 					</ButtonGradient>
 
-					<BlogLink>See the Blog</BlogLink>
+					<BlogLink href="/socket/BTC_THB">Go to WebSocket.</BlogLink>
 				</TextContainer>
 
 				<ImageBannerConatainer>

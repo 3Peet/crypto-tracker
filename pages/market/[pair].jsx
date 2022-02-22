@@ -94,7 +94,7 @@ const Market = () => {
 	);
 };
 
-const VerticalLine = styled.div`
+export const VerticalLine = styled.div`
 	margin: 25px 0;
 	border-left: 1px solid rgba(209, 213, 219, 0.3);
 `;
@@ -109,14 +109,14 @@ const PairButton = styled(Button)`
 	}
 `;
 
-const PairContainer = styled.div`
+export const PairContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-top: 90px;
 `;
 
-const CardGlass = styled.div`
+export const CardGlass = styled.div`
 	display: flex;
 	flex-direction: row-reverse;
 	backdrop-filter: blur(18px) saturate(180%);

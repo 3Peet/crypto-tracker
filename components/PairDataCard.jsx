@@ -8,62 +8,78 @@ import {
 	CaretDownFilled,
 } from "@ant-design/icons";
 
-const PairDataCard = ({title, lastPrice, quoteVolume, priceChangePercent}) => (
-	<PariDataCardContainer>
-		<PairDataCardTitle>
-			<p>{title.replace("_", "/")}</p>
-			<PairLogo
-				src={`https://storage.googleapis.com/satang-pro/public/assets/icons/coins/${title
-					.split("_")[0]
-					.toLowerCase()}.png`}
-				alt="coin"
-				width={24}
-				height={24}
-			/>
-		</PairDataCardTitle>
-		<Statistic
-			value={lastPrice}
-			precision={2}
-			valueStyle={{marginTop: "-10px"}}
-		/>
-		<PairDataCardButtom>
-			{priceChangePercent >= 0 ? (
-				<CaretUpFilled
-					style={{
-						fontSize: "0.8rem",
-						color: "green",
-						display: "flex",
-						alignItems: "center",
-						marginRight: "5px",
-					}}
+const PairDataCard = ({
+	title,
+	lastPrice,
+	quoteVolume,
+	priceChangePercent = false,
+}) => {
+	return (
+		<PariDataCardContainer>
+			<PairDataCardTitle>
+				<p>{title.replace("_", "/")}</p>
+				<PairLogo
+					src={`https://storage.googleapis.com/satang-pro/public/assets/icons/coins/${title
+						.split("_")[0]
+						.toLowerCase()}.png`}
+					alt="coin"
+					width={24}
+					height={24}
 				/>
-			) : (
-				<CaretDownFilled
-					style={{
-						fontSize: "0.8rem",
-						color: "red",
-						display: "flex",
-						alignItems: "center",
-						marginRight: "5px",
-					}}
-				/>
-			)}
-			<PercentStatistic value={priceChangePercent}>
-				{" "}
-				{`${Number(priceChangePercent).toFixed(2)}%`}
-			</PercentStatistic>
+			</PairDataCardTitle>
 			<Statistic
-				prefix={"Volume:"}
-				value={quoteVolume}
+				value={lastPrice}
 				precision={2}
-				valueStyle={{color: "#8b8e99", fontSize: "0.8071rem"}}
+				valueStyle={{marginTop: "-10px"}}
 			/>
-		</PairDataCardButtom>
-	</PariDataCardContainer>
-);
+			<PairDataCardButtom>
+				{priceChangePercent && (
+					<div>
+						{priceChangePercent >= 0 ? (
+							<CaretUpFilled
+								style={{
+									fontSize: "0.8rem",
+									color: "green",
+									display: "flex",
+									alignItems: "center",
+									marginRight: "5px",
+								}}
+							/>
+						) : (
+							<CaretDownFilled
+								style={{
+									fontSize: "0.8rem",
+									color: "red",
+									display: "flex",
+									alignItems: "center",
+									marginRight: "5px",
+								}}
+							/>
+						)}
+						<PercentStatistic value={priceChangePercent}>
+							{" "}
+							{`${Number(priceChangePercent).toFixed(2)}%`}
+						</PercentStatistic>
+					</div>
+				)}
+
+				<Statistic
+					prefix={"Volume:"}
+					value={quoteVolume}
+					precision={2}
+					valueStyle={{color: "#8b8e99", fontSize: "0.8071rem"}}
+				/>
+			</PairDataCardButtom>
+		</PariDataCardContainer>
+	);
+};
 
 const PairDataCardButtom = styled.div`
 	display: flex;
+
+	& > div {
+		display: flex;
+	}
 `;
 
 const PercentStatistic = styled.div`

@@ -22,24 +22,28 @@ const Websocket = () => {
 	];
 
 	// manage pair data
-	const [data, setData] = useState([{c: 0, q: 0}]);
+	const [data, setData] = useState([{s: pair.toLowerCase(), c: 0, q: 0}]);
+	const [filteredData, serFilteredData] = useState([{c: 0, q: 0}]);
 
 	useEffect(() => {
-		// Create WebSocket connection. [Updating data every 3 seconds.]
+		// Create WebSocket connection.
 		const socket = new WebSocket("wss://ws.satangcorp.com/ws/!miniTicker@arr");
 
 		// Listen for messages
 		socket.addEventListener("message", function (event) {
-			setData(
-				JSON.parse(event.data).filter((item) => item.s === pair.toLowerCase())
-			);
+			setData(JSON.parse(event.data));
 		});
 
 		// Unmount WebSocket | Disconnected
 		return () => {
 			socket.close();
 		};
-	}, [pair]);
+	}, []);
+
+	// Filtering data
+	useEffect(() => {
+		serFilteredData(data.filter((item) => item.s === pair.toLowerCase()));
+	}, [data, pair]);
 
 	return (
 		<>
@@ -61,10 +65,11 @@ const Websocket = () => {
 						>
 							<PairDataCard
 								title={pair}
-								lastPrice={data[0].c}
-								quoteVolume={data[0].q}
+								lastPrice={filteredData[0].c}
+								quoteVolume={filteredData[0].q}
 							/>
 						</Card>
+
 						<VerticalLine />
 						<Card
 							style={{width: 300, background: "none", border: "none"}}

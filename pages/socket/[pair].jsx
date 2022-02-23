@@ -24,6 +24,7 @@ const Websocket = () => {
 	// manage pair data
 	const [data, setData] = useState([{s: pair.toLowerCase(), c: 0, q: 0}]);
 	const [filteredData, serFilteredData] = useState([{c: 0, q: 0}]);
+	const [isConnected, setIsConnected] = useState(false);
 
 	useEffect(() => {
 		// Create WebSocket connection.
@@ -31,6 +32,7 @@ const Websocket = () => {
 
 		// Listen for messages
 		socket.addEventListener("message", function (event) {
+			if (!isConnected) setIsConnected(true);
 			setData(JSON.parse(event.data));
 		});
 
@@ -52,48 +54,58 @@ const Websocket = () => {
 			</Head>
 			<LayoutContainer>
 				<Navbar />
-				<PairContainer>
-					<CardGlass>
-						<Card
-							style={{width: 300, background: "none", border: "none"}}
-							bodyStyle={{
-								display: "flex",
-								flexDirection: "column",
-								justifyContent: "center",
-								height: 400,
-							}}
-						>
-							<PairDataCard
-								title={pair}
-								lastPrice={filteredData[0].c}
-								quoteVolume={filteredData[0].q}
-							/>
-						</Card>
+				{!isConnected ? (
+					<LoadingContainer>Loading . . .</LoadingContainer>
+				) : (
+					<PairContainer>
+						<CardGlass>
+							<Card
+								style={{width: 300, background: "none", border: "none"}}
+								bodyStyle={{
+									display: "flex",
+									flexDirection: "column",
+									justifyContent: "center",
+									height: 400,
+								}}
+							>
+								<PairDataCard
+									title={pair}
+									lastPrice={filteredData[0].c}
+									quoteVolume={filteredData[0].q}
+								/>
+							</Card>
 
-						<VerticalLine />
-						<Card
-							style={{width: 300, background: "none", border: "none"}}
-							bodyStyle={{
-								display: "flex",
-								flexDirection: "column",
-								justifyContent: "center",
-								height: 400,
-							}}
-						>
-							{ButtonTypes.map((item, index) => (
-								<PairButton key={index} style={{margin: 10, height: 50}}>
-									<Link href={`/socket/${item.name}`}>
-										{item.name.replace("_", "/")}
-									</Link>
-								</PairButton>
-							))}
-						</Card>
-					</CardGlass>
-				</PairContainer>
+							<VerticalLine />
+							<Card
+								style={{width: 300, background: "none", border: "none"}}
+								bodyStyle={{
+									display: "flex",
+									flexDirection: "column",
+									justifyContent: "center",
+									height: 400,
+								}}
+							>
+								{ButtonTypes.map((item, index) => (
+									<PairButton key={index} style={{margin: 10, height: 50}}>
+										<Link href={`/socket/${item.name}`}>
+											{item.name.replace("_", "/")}
+										</Link>
+									</PairButton>
+								))}
+							</Card>
+						</CardGlass>
+					</PairContainer>
+				)}
 			</LayoutContainer>
 		</>
 	);
 };
+
+const LoadingContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	margin-top: 200px;
+`;
 
 const PairButton = styled(Button)`
 	border-radius: 10px;
